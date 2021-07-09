@@ -43,6 +43,16 @@ const App = () => {
         todoNameRef.current.value = null
     }
 
+    function handleKeyDown (event){
+        if (event.key === 'Enter') {
+        const name = todoNameRef.current.value
+        if (name === '') return
+        setTodos(prevTodos => {
+            return [...prevTodos, {id: uuidv4(), name: name, complete:false }]
+        })
+        todoNameRef.current.value = null}
+    }
+
     function handeleClearTodos(){
         const newTodos = todos.filter (todo=>!todo.complete)
         setTodos(newTodos)
@@ -55,18 +65,18 @@ const App = () => {
             </div>
 
             <div className="row mx-auto justify-content-center text-center">
-                <input className="col-3 inputfield rounded shadow" ref={todoNameRef} type="text"/>
-                <button className="col-2 mx-2 btn btn-pill btn-success btnadd shadow" onClick={handleAddTodo}>Add To Do</button>
+                <input className="col-md-3 col-sm-7 inputfield rounded shadow mb-2" ref={todoNameRef} type="text" onKeyDown={handleKeyDown}/>
+                <button className="col-md-2 col-sm-6 mx-2 btn btn-pill btn-success btnadd shadow mb-2" onClick={handleAddTodo}>Add To Do</button>
             </div>
 
             <div className="row mt-5">
-                <div className="col-5 border rounded mx-auto minima shadow">
+                <div className="col-md-5 col-sm-8 border rounded mx-auto minima shadow mb-3">
                     <span className="m-2 h3 d-block">Not completed</span>
                     <TodoList toggleTodo={toggleTodo} deleteTodo={deleteTodo} todos={todos.filter(todos=>!todos.complete)} />
-                    <span className="field1"> <div className="d-inline">{todos.filter(todo => !todo.complete).length} </div> {todos.length == 1 ? ' to-do left' : ' to-dos left'}  </span>
+                    <span className="field1"> <div className="d-inline">{todos.filter(todo => !todo.complete).length} </div> {todos.filter(todo => !todo.complete).length === 1 ? ' to-do left' : ' to-dos left'}  </span>
                 </div>
 
-                <div className="col-5 border rounded mx-auto minima shadow">
+                <div className="col-md-5 col-sm-8 border rounded mx-auto minima shadow mb-3">
                     <span className="m-1 h3 d-block">Completed</span>
                     <TodoList toggleTodo={toggleTodo} deleteTodo={deleteTodo} todos={todos.filter(todos=>todos.complete)}/>
                     <button className="field2 btn btn-pill btn-warning btnclear shadow" onClick={handeleClearTodos}>Clear Complete</button>

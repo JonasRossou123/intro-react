@@ -46,6 +46,7 @@ h1{
 }
 
 .minima{
+  column-gap: 3px;
   min-height: 180px!important;
   background-color: #F2EDD7;
 }

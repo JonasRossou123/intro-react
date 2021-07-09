@@ -1,5 +1,5 @@
 
-import { Checkbox, IconButton, ListItem, Typography } from "@material-ui/core";
+import { Checkbox, IconButton} from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import React from 'react';
 
